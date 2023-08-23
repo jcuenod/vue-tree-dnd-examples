@@ -124,10 +124,14 @@ export const moveMutation: (
       if (!parentNode) {
         throw new Error(`Could not find target node with id: ${parentNodeId}`);
       }
+
+      const targetNodeIndex =
+        parentNode.children.findIndex((node) => node.id === targetId) +
+        (position === "LEFT" ? 0 : 1);
       parentNode.children = [
-        ...(position === "LEFT" ? [sourceNode] : []),
-        ...(parentNode?.children || []),
-        ...(position === "RIGHT" ? [sourceNode] : []),
+        ...parentNode.children.slice(0, targetNodeIndex),
+        sourceNode,
+        ...parentNode.children.slice(targetNodeIndex),
       ];
     }
   } else {
