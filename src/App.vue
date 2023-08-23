@@ -1,5 +1,23 @@
 <template>
   <h1>Vue-Tree-Dnd Demo</h1>
+  <h2>Open source draggable tree component for Vue 3</h2>
+  <div style="text-align: center">
+    <!-- npm badge -->
+    <a href="https://www.npmjs.com/package/vue-tree-dnd"
+      ><img
+        src="https://img.shields.io/npm/v/vue-tree-dnd.svg?style=for-the-badge"
+        alt="npm version"
+        height="18"
+    /></a>
+    {{ " " }}
+    <!-- github (license) badge -->
+    <a href="https://github.com/jcuenod/vue-tree-dnd"
+      ><img
+        src="https://img.shields.io/github/license/jcuenod/vue-tree-dnd.svg?style=for-the-badge"
+        alt="npm version"
+        height="18"
+    /></a>
+  </div>
   <div class="container">
     <button @click="newFolder" class="new-button">
       <span style="width: 1rem; height: 1rem"
@@ -24,8 +42,8 @@
     </div>
   </div>
 
-  <div>
-    Open source draggable tree component for Vue 3 ·
+  <div class="footer">
+    Made with <span style="color: #e25555">&#9829;</span> by James Cuénod ·
     <a href="https://github.com/jcuenod/vue-tree-dnd">Code</a> ·
     <a href="https://www.npmjs.com/package/vue-tree-dnd">Package</a> ·
     <a href="https://github.com/jcuenod/vue-tree-dnd/issues">Issues</a>
@@ -56,13 +74,30 @@ const newFolder = () => {
 };
 
 provide("delete", (id: TreeItemId) => {
+  const areYouSure = window.confirm(
+    "Are you sure you want to delete this item?"
+  );
+  if (!areYouSure) return;
   tree.value = deleteNodeFromTree(tree.value, id);
 });
 </script>
 
 <style scoped>
+h1 {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 0;
+  padding: 0;
+}
+h2 {
+  text-align: center;
+  margin-top: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: normal;
+}
 .container {
-  margin: 4rem auto 0;
+  margin: 2rem auto 0;
   width: 400px;
   padding: 2em;
   background-color: white;
@@ -94,5 +129,15 @@ provide("delete", (id: TreeItemId) => {
 }
 .new-button span {
   margin: 0.2rem;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #eee;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.8rem;
 }
 </style>
