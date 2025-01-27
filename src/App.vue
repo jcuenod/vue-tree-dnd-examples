@@ -72,8 +72,8 @@
     <div style="padding-top: 1rem; padding-bottom: 1rem">
       <VueTreeDnd
         :component="TreeItemRenderer"
-        :tree="tree"
         :locked="locked"
+        v-model="tree"
         @move="onMove"
       />
     </div>
@@ -89,7 +89,11 @@
 
 <script setup lang="ts">
 import { ref, provide } from "vue";
-import VueTreeDnd, { MoveMutation, TreeItem, TreeItemId } from "vue-tree-dnd";
+import VueTreeDnd, {
+  MoveMutation,
+  TreeItem,
+  TreeItemId,
+} from "vue-tree-dnd";
 import TreeItemRenderer from "./components/TreeItemRenderer.vue";
 import { deleteNodeFromTree, moveMutation } from "./tree-helper";
 import { getRandomName } from "./naming-helper";
@@ -106,6 +110,7 @@ const newFolder = () => {
   const newNode = {
     id: name,
     name: name,
+    expanded: true,
     children: [],
   };
   tree.value = [...tree.value, newNode];
