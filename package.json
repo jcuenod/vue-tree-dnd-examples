@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^3.3.4",
-    "vue-tree-dnd": "^0.2.0"
+    "vue-tree-dnd": "^0.2.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
